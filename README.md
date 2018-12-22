@@ -1,4 +1,4 @@
-# 企业级开发平台PHP版V2.0
+# 企业级开发平台PHP版V1.0
 
 <p align="center">
   <img width="300" src="http://images.kivii.renxixi.com/rxthink/logo.png" alt="RXThink开发团队">
