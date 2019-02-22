@@ -28,7 +28,7 @@ layui.define(['larry','form','larryms'],function(exports){
             // 组件
             slide_links: 'blank',
             slides: [{
-                image: '/Public/Admin/images/login/desktop.png'
+                image: '/static/admin/images/login/desktop.jpg'
             }]
         });
     }
@@ -37,7 +37,7 @@ layui.define(['larry','form','larryms'],function(exports){
     
     form.on('submit(submit)', function(data) {
 
-    	$.post("Login/login", data.field, function(data){
+    	$.post("/Login/login", data.field, function(data){
 			if (data.success) {
 				layer.msg('登录成功', {
 	                icon: 1,

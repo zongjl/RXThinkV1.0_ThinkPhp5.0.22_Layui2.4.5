@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 常用挂件
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-11
  */
 namespace app\admin\widget;
@@ -12,7 +21,7 @@ class CommonWidget extends BaseWidget
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function __construct()
@@ -23,7 +32,7 @@ class CommonWidget extends BaseWidget
     /**
      * 单图上传
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function uploadImg($name, $imgUrl, $size='90x90', $nameStr='', $sizeStr='', $cropSize='', $cropRate='')
@@ -56,7 +65,7 @@ class CommonWidget extends BaseWidget
     /**
      * 多图上传
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function uploadMultImg($name, $imageList, $imgMsg, $size, $maxNum=9)
@@ -81,7 +90,7 @@ class CommonWidget extends BaseWidget
     /**
      * SWITCH组件开关
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function switchCheck($idStr, $textStr, $selectId)
@@ -96,7 +105,7 @@ class CommonWidget extends BaseWidget
     /**
      * 下拉单选
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function singleSelect($param, $list, $selectId)
@@ -123,7 +132,7 @@ class CommonWidget extends BaseWidget
     /**
      * 拼音转换
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function pinyin($pinyin, $code)

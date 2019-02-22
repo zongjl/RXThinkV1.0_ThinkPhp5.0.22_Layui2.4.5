@@ -1,7 +1,7 @@
 /**
  *	权限设置
  *
- *	@auth zongjl
+ *	@auth 牧羊人
  *	@date 2018-07-17
  */
 layui.use(['form','func'],function(){
@@ -80,15 +80,12 @@ layui.use(['form','func'],function(){
 		$.post(url, data.field, function(data){
 			if (data.success) {
 				layer.close(index);
-				layer.msg(data.msg,{ icon: 6, time: 1000 });
+				layer.msg("保存成功！");
 				layer.closeAll("iframe");
 				
-				//延迟5秒
-                setTimeout(function(){
-                	//刷新父页面
-    				history.back();
-                },500);
-                
+				//刷新父页面
+				history.back();
+				
 				return false ;
 			}else{
 				layer.close(index);

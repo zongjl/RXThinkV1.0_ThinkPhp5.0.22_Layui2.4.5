@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 城市挂件
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-12
  */
 namespace app\admin\widget;
@@ -13,7 +22,7 @@ class CityWidget extends BaseWidget
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     function __construct()
@@ -25,7 +34,7 @@ class CityWidget extends BaseWidget
     /**
      * 选择城市【常规模式】
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     function simpleSelect($cityId, $limit=3)
@@ -53,7 +62,7 @@ class CityWidget extends BaseWidget
     /**
      * 城市选择【复杂模式】
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     function complexSelect($param, $selectId, $limit=3)

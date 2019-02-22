@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 权限设置-控制器
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-12
  */
 namespace app\admin\controller;
@@ -13,7 +22,7 @@ class AdminAuthController extends AdminBaseController
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     function __construct()
@@ -25,7 +34,7 @@ class AdminAuthController extends AdminBaseController
     /**
      * 获取数据列表
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      * (non-PHPdoc)
      * @see \app\admin\controller\AdminBaseController::index()
@@ -48,7 +57,7 @@ class AdminAuthController extends AdminBaseController
     /**
      * 保存权限设置
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-13
      */
     function setAuth()

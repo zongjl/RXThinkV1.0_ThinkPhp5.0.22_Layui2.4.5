@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 栏目-控制器
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-13
  */
 namespace app\admin\controller;
@@ -14,7 +23,7 @@ class ItemCateController extends AdminBaseController
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-13
      */
     function __construct()
@@ -27,7 +36,7 @@ class ItemCateController extends AdminBaseController
     /**
      * 添加或编辑
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-13
      * (non-PHPdoc)
      * @see \app\admin\controller\AdminBaseController::edit()
@@ -52,7 +61,7 @@ class ItemCateController extends AdminBaseController
     /**
      * 获取子级栏目【挂件专用】
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-13
      */
     function getChilds()

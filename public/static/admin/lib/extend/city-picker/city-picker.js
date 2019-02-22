@@ -1,1 +1,588 @@
-layui.define(["jquery","layer","element","form"],function(t){var d=layui.$;"use strict";if(typeof ChineseDistricts==="undefined"){throw new Error('The file "city-picker.data.js" must be included first!')}var a="citypicker";var s="change."+a;var h="province";var l="city";var p="district";var o=function(t,e){this.$element=d(t);this.$dropdown=null;this.options=d.extend({},o.DEFAULTS,d.isPlainObject(e)&&e);this.active=false;this.dems=[];this.needBlur=false;this.init()};o.prototype={constructor:o,init:function(){this.defineDems();this.render();this.bind();this.active=true},render:function(){var t=this.getPosition(),e=this.$element.attr("placeholder")||this.options.placeholder,i='<span class="city-picker-span" style="'+this.getWidthStyle(t.width)+"height:"+(t.height-2)+"px;line-height:"+(t.height-1)+'px;">'+(e?'<span class="placeholder">'+e+"</span>":"")+'<span class="title"></span><div class="arrow"></div>'+"</span>",s='<div class="city-picker-dropdown" style="left:0px;top:100%;'+this.getWidthStyle(t.width,true)+'">'+'<div class="city-select-wrap">'+'<div class="city-select-tab">'+'<a class="active" data-count="province">省份</a>'+(this.includeDem("city")?'<a data-count="city">城市</a>':"")+(this.includeDem("district")?'<a data-count="district">区县</a>':"")+"</div>"+'<div class="city-select-content">'+'<div class="city-select province" data-count="province"></div>'+(this.includeDem("city")?'<div class="city-select city" data-count="city"></div>':"")+(this.includeDem("district")?'<div class="city-select district" data-count="district"></div>':"")+"</div></div>";this.$element.addClass("city-picker-input");this.$textspan=d(i).insertAfter(this.$element);this.$dropdown=d(s).insertAfter(this.$textspan);var n=this.$dropdown.find(".city-select");d.each(this.dems,d.proxy(function(t,e){this["$"+e]=n.filter("."+e+"")},this));this.refresh()},refresh:function(i){var t=this.$dropdown.find(".city-select");t.data("item",null);var s=this.$element.val()||"";s=s.split("/");d.each(this.dems,d.proxy(function(t,e){if(s[t]&&t<s.length){this.options[e]=s[t]}else if(i){this.options[e]=""}this.output(e)},this));this.tab(h);this.feedText();this.feedVal()},defineDems:function(){var i=false;if(this.options.provincename!==""){h=this.options.provincename}if(this.options.cityname!==""){l=this.options.cityename}if(this.options.districtname!==""){p=this.options.districtname}d.each([h,l,p],d.proxy(function(t,e){if(!i){this.dems.push(e)}if(e===this.options.level){i=true}},this))},includeDem:function(t){return d.inArray(t,this.dems)!==-1},getPosition:function(){var t,e,i,s,n;t=this.$element.position();s=this.getSize(this.$element);e=s.height;i=s.width;if(this.options.responsive){n=this.$element.offsetParent().width();if(n){i=i/n;if(i>.99){i=1}i=i*100+"%"}}return{top:t.top||0,left:t.left||0,height:e,width:i}},getSize:function(t){var e,i,s;if(!t.is(":visible")){e=d("<div />").appendTo(d("body"));e.css({position:"absolute !important",visibility:"hidden !important",display:"block !important"});i=t.clone().appendTo(e);s={width:i.outerWidth(),height:i.outerHeight()};e.remove()}else{s={width:t.outerWidth(),height:t.outerHeight()}}return s},getWidthStyle:function(t,e){if(this.options.responsive&&!d.isNumeric(t)){return"width:"+t+";"}else{return"width:"+(e?Math.max(320,t):t)+"px;"}},bind:function(){var c=this;d(document).on("click",this._mouteclick=function(t){var e=d(t.target);var i,s,n;if(e.is(".city-picker-span")){s=e}else if(e.is(".city-picker-span *")){s=e.parents(".city-picker-span")}if(e.is(".city-picker-input")){n=e}if(e.is(".city-picker-dropdown")){i=e}else if(e.is(".city-picker-dropdown *")){i=e.parents(".city-picker-dropdown")}if(!n&&!s&&!i||s&&s.get(0)!==c.$textspan.get(0)||n&&n.get(0)!==c.$element.get(0)||i&&i.get(0)!==c.$dropdown.get(0)){c.close(true)}});this.$element.on("change",this._changeElement=d.proxy(function(){this.close(true);this.refresh(true)},this)).on("focus",this._focusElement=d.proxy(function(){this.needBlur=true;this.open()},this)).on("blur",this._blurElement=d.proxy(function(){if(this.needBlur){this.needBlur=false;this.close(true)}},this));this.$textspan.on("click",function(t){var e=d(t.target),i;c.needBlur=false;if(e.is(".select-item")){i=e.data("count");c.open(i)}else{if(c.$dropdown.is(":visible")){c.close()}else{c.open()}}}).on("mousedown",function(){c.needBlur=false});this.$dropdown.on("click",".city-select a",function(){var t=d(this).parents(".city-select");var e=t.find("a.active");var i=t.next().length===0;e.removeClass("active");d(this).addClass("active");if(e.data("code")!==d(this).data("code")){t.data("item",{address:d(this).attr("title"),code:d(this).data("code")});d(this).trigger(s);c.feedText();c.feedVal();if(i){c.close()}}}).on("click",".city-select-tab a",function(){if(!d(this).hasClass("active")){var t=d(this).data("count");c.tab(t)}}).on("mousedown",function(){c.needBlur=false});if(this.$province){this.$province.on(s,this._changeProvince=d.proxy(function(){this.output(l);this.output(p);this.tab(l)},this))}if(this.$city){this.$city.on(s,this._changeCity=d.proxy(function(){this.output(p);this.tab(p)},this))}},open:function(t){t=t||h;this.$dropdown.show();this.$textspan.addClass("open").addClass("focus");this.tab(t)},close:function(t){this.$dropdown.hide();this.$textspan.removeClass("open");if(t){this.$textspan.removeClass("focus")}},unbind:function(){d(document).off("click",this._mouteclick);this.$element.off("change",this._changeElement);this.$element.off("focus",this._focusElement);this.$element.off("blur",this._blurElement);this.$textspan.off("click");this.$textspan.off("mousedown");this.$dropdown.off("click");this.$dropdown.off("mousedown");if(this.$province){this.$province.off(s,this._changeProvince)}if(this.$city){this.$city.off(s,this._changeCity)}},getText:function(){var i="";this.$dropdown.find(".city-select").each(function(){var t=d(this).data("item"),e=d(this).data("count");if(t){i+=(d(this).hasClass("province")?"":"/")+'<span class="select-item" data-count="'+e+'" data-code="'+t.code+'">'+t.address+'</span><input type="hidden" name="'+e+'_id"  value="'+t.code+'"  />'}});return i},getPlaceHolder:function(){return this.$element.attr("placeholder")||this.options.placeholder},feedText:function(){var t=this.getText();if(t){this.$textspan.find(">.placeholder").hide();this.$textspan.find(">.title").html(this.getText()).show()}else{this.$textspan.find(">.placeholder").text(this.getPlaceHolder()).show();this.$textspan.find(">.title").html("").hide()}},getVal:function(){var e="";this.$dropdown.find(".city-select").each(function(){var t=d(this).data("item");if(t){e+=(d(this).hasClass("province")?"":"/")+t.address}});return e},feedVal:function(){this.$element.val(this.getVal())},output:function(n){var t=this.options;var e=this["$"+n];var c=n===h?{}:[];var i;var s;var a;var o=null;var r;if(!e||!e.length){return}i=e.data("item");r=(i?i.address:null)||t[n];a=n===h?86:n===l?this.$province&&this.$province.find(".active").data("code"):n===p?this.$city&&this.$city.find(".active").data("code"):a;s=d.isNumeric(a)?ChineseDistricts[a]:null;if(d.isPlainObject(s)){d.each(s,function(t,e){var i;if(n===h){i=[];for(var s=0;s<e.length;s++){if(e[s].address===r){o={code:e[s].code,address:e[s].address}}i.push({code:e[s].code,address:e[s].address,selected:e[s].address===r})}c[t]=i}else{if(e===r){o={code:t,address:e}}c.push({code:t,address:e,selected:e===r})}})}e.html(n===h?this.getProvinceList(c):this.getList(c,n));e.data("item",o)},getProvinceList:function(t){var i=[],s=this,n=this.options.simple;d.each(t,function(t,e){i.push('<dl class="clearfix">');i.push("<dt>"+t+"</dt><dd>");d.each(e,function(t,e){i.push("<a"+' title="'+(e.address||"")+'"'+' data-code="'+(e.code||"")+'"'+' class="'+(e.selected?" active":"")+'">'+(n?s.simplize(e.address,h):e.address)+"</a>")});i.push("</dd></dl>")});return i.join("")},getList:function(t,i){var s=[],n=this,c=this.options.simple;s.push('<dl class="clearfix"><dd>');d.each(t,function(t,e){s.push("<a"+' title="'+(e.address||"")+'"'+' data-code="'+(e.code||"")+'"'+' class="'+(e.selected?" active":"")+'">'+(c?n.simplize(e.address,i):e.address)+"</a>")});s.push("</dd></dl>");return s.join("")},simplize:function(t,e){t=t||"";if(e===h){return t.replace(/[省,市,自治区,壮族,回族,维吾尔]/g,"")}else if(e===l){return t.replace(/[市,地区,回族,蒙古,苗族,白族,傣族,景颇族,藏族,彝族,壮族,傈僳族,布依族,侗族]/g,"").replace("哈萨克","").replace("自治州","").replace(/自治县/,"")}else if(e===p){return t.length>2?t.replace(/[市,区,县,旗]/g,""):t}},tab:function(t){var e=this.$dropdown.find(".city-select");var i=this.$dropdown.find(".city-select-tab > a");var s=this["$"+t];var n=this.$dropdown.find('.city-select-tab > a[data-count="'+t+'"]');if(s){e.hide();s.show();i.removeClass("active");n.addClass("active")}},reset:function(){this.$element.val(null).trigger("change")},destroy:function(){this.unbind();this.$element.removeData(a).removeClass("city-picker-input");this.$textspan.remove();this.$dropdown.remove()}};o.DEFAULTS={simple:false,responsive:false,placeholder:"请选择省/市/区",level:"district",provincename:"",cityname:"",districtname:"",province:"",city:"",district:""};o.setDefaults=function(t){d.extend(o.DEFAULTS,t)};o.other=d.fn.citypicker;d.fn.citypicker=function(n){var c=[].slice.call(arguments,1);return this.each(function(){var t=d(this);var e=t.data(a);var i;var s;if(!e){if(/destroy/.test(n)){return}i=d.extend({},t.data(),d.isPlainObject(n)&&n);t.data(a,e=new o(this,i))}if(typeof n==="string"&&d.isFunction(s=e[n])){s.apply(e,c)}})};d.fn.citypicker.Constructor=o;d.fn.citypicker.setDefaults=o.setDefaults;d.fn.citypicker.noConflict=function(){d.fn.citypicker=o.other;return this};t("citypicker",o)});
+
+/**
+ * 城市选择组件
+ * 
+ * @author 牧羊人
+ * @date 2018-11-22
+ */
+layui.define(['jquery', 'layer', 'element', 'form'], function (exports) {
+
+    var $ = layui.$;
+    'use strict';
+    if (typeof ChineseDistricts === 'undefined') {
+        throw new Error('The file "city-picker.data.js" must be included first!');
+    }
+    var NAMESPACE = 'citypicker';
+    var EVENT_CHANGE = 'change.' + NAMESPACE;
+    var PROVINCE = 'province';
+    var CITY = 'city';
+    var DISTRICT = 'district';
+
+    /**
+     * 城市选择类
+     */
+    var CityPicker = function (element, options) {
+        this.$element = $(element);
+        this.$dropdown = null;
+        this.options = $.extend({}, CityPicker.DEFAULTS, $.isPlainObject(options) && options);
+        this.active = false;
+        this.dems = [];
+        this.needBlur = false;
+        this.init();
+    };
+
+    /**
+     * 城市选择组件属性
+     */
+    CityPicker.prototype = {
+        constructor: CityPicker,
+        init: function () {
+            this.defineDems();
+            this.render();
+            this.bind();
+            this.active = true;
+        },
+
+        render: function () {
+            var p = this.getPosition(),
+                placeholder = this.$element.attr('placeholder') || this.options.placeholder,
+                textspan = '<span class="city-picker-span" style="' +
+                    this.getWidthStyle(p.width) + 'height:' +
+                    (p.height - 2) + 'px;line-height:' + (p.height - 1) + 'px;">' +
+                    (placeholder ? '<span class="placeholder">' + placeholder + '</span>' : '') +
+                    '<span class="title"></span><div class="arrow"></div>' + '</span>',
+
+                dropdown = '<div class="city-picker-dropdown" style="left:0px;top:100%;' +
+                    this.getWidthStyle(p.width, true) + '">' +
+                    '<div class="city-select-wrap">' +
+                    '<div class="city-select-tab">' +
+                    '<a class="active" data-count="province">省份</a>' +
+                    (this.includeDem('city') ? '<a data-count="city">城市</a>' : '') +
+                    (this.includeDem('district') ? '<a data-count="district">区县</a>' : '') + '</div>' +
+                    '<div class="city-select-content">' +
+                    '<div class="city-select province" data-count="province"></div>' +
+                    (this.includeDem('city') ? '<div class="city-select city" data-count="city"></div>' : '') +
+                    (this.includeDem('district') ? '<div class="city-select district" data-count="district"></div>' : '') +
+                    '</div></div>';
+
+            this.$element.addClass('city-picker-input');
+            this.$textspan = $(textspan).insertAfter(this.$element);
+            this.$dropdown = $(dropdown).insertAfter(this.$textspan);
+            var $select = this.$dropdown.find('.city-select');
+
+            // setup this.$province, this.$city and/or this.$district object
+            $.each(this.dems, $.proxy(function (i, type) {
+                this['$' + type] = $select.filter('.' + type + '');
+            }, this));
+
+            this.refresh();
+        },
+
+        refresh: function (force) {
+            // clean the data-item for each $select
+            var $select = this.$dropdown.find('.city-select');
+            $select.data('item', null);
+            // parse value from value of the target $element
+            var val = this.$element.val() || '';
+            val = val.split('/');
+            $.each(this.dems, $.proxy(function (i, type) {
+                if (val[i] && i < val.length) {
+                    this.options[type] = val[i];
+                } else if (force) {
+                    this.options[type] = '';
+                }
+                this.output(type);
+            }, this));
+            this.tab(PROVINCE);
+            this.feedText();
+            this.feedVal();
+        },
+
+        defineDems: function () {
+            var stop = false;
+//            debugger;
+            if (this.options.provincename !== "") {
+                PROVINCE = this.options.provincename;
+            }
+            if (this.options.cityname !== "") {
+                CITY = this.options.cityename;
+            }
+            if (this.options.districtname !== "") {
+                DISTRICT = this.options.districtname;
+            }
+
+            $.each([PROVINCE, CITY, DISTRICT], $.proxy(function (i, type) {
+                if (!stop) {
+                    this.dems.push(type);
+                }
+                if (type === this.options.level) {
+                    stop = true;
+                }
+            }, this));
+        },
+
+        includeDem: function (type) {
+            return $.inArray(type, this.dems) !== -1;
+        },
+
+        getPosition: function () {
+            var p, h, w, s, pw;
+            p = this.$element.position();
+            s = this.getSize(this.$element);
+            h = s.height;
+            w = s.width;
+            if (this.options.responsive) {
+                pw = this.$element.offsetParent().width();
+                if (pw) {
+                    w = w / pw;
+                    if (w > 0.99) {
+                        w = 1;
+                    }
+                    w = w * 100 + '%';
+                }
+            }
+
+            return {
+                top: p.top || 0,
+                left: p.left || 0,
+                height: h,
+                width: w
+            };
+        },
+
+        getSize: function ($dom) {
+            var $wrap, $clone, sizes;
+            if (!$dom.is(':visible')) {
+                $wrap = $("<div />").appendTo($("body"));
+                $wrap.css({
+                    "position": "absolute !important",
+                    "visibility": "hidden !important",
+                    "display": "block !important"
+                });
+
+                $clone = $dom.clone().appendTo($wrap);
+
+                sizes = {
+                    width: $clone.outerWidth(),
+                    height: $clone.outerHeight()
+                };
+
+                $wrap.remove();
+            } else {
+                sizes = {
+                    width: $dom.outerWidth(),
+                    height: $dom.outerHeight()
+                };
+            }
+
+            return sizes;
+        },
+
+        getWidthStyle: function (w, dropdown) {
+            if (this.options.responsive && !$.isNumeric(w)) {
+                return 'width:' + w + ';';
+            } else {
+                return 'width:' + (dropdown ? Math.max(320, w) : w) + 'px;';
+            }
+        },
+
+        bind: function () {
+            var $this = this;
+
+            $(document).on('click', (this._mouteclick = function (e) {
+                var $target = $(e.target);
+                var $dropdown, $span, $input;
+                if ($target.is('.city-picker-span')) {
+                    $span = $target;
+                } else if ($target.is('.city-picker-span *')) {
+                    $span = $target.parents('.city-picker-span');
+                }
+                if ($target.is('.city-picker-input')) {
+                    $input = $target;
+                }
+                if ($target.is('.city-picker-dropdown')) {
+                    $dropdown = $target;
+                } else if ($target.is('.city-picker-dropdown *')) {
+                    $dropdown = $target.parents('.city-picker-dropdown');
+                }
+                if ((!$input && !$span && !$dropdown) ||
+                    ($span && $span.get(0) !== $this.$textspan.get(0)) ||
+                    ($input && $input.get(0) !== $this.$element.get(0)) ||
+                    ($dropdown && $dropdown.get(0) !== $this.$dropdown.get(0))) {
+                    $this.close(true);
+                }
+
+            }));
+
+            this.$element.on('change', (this._changeElement = $.proxy(function () {
+                this.close(true);
+                this.refresh(true);
+            }, this))).on('focus', (this._focusElement = $.proxy(function () {
+                this.needBlur = true;
+                this.open();
+            }, this))).on('blur', (this._blurElement = $.proxy(function () {
+                if (this.needBlur) {
+                    this.needBlur = false;
+                    this.close(true);
+                }
+            }, this)));
+
+            this.$textspan.on('click', function (e) {
+                var $target = $(e.target), type;
+                $this.needBlur = false;
+                if ($target.is('.select-item')) {
+                    type = $target.data('count');
+                    $this.open(type);
+                } else {
+                    if ($this.$dropdown.is(':visible')) {
+                        $this.close();
+                    } else {
+                        $this.open();
+                    }
+                }
+            }).on('mousedown', function () {
+                $this.needBlur = false;
+            });
+
+            this.$dropdown.on('click', '.city-select a', function () {
+                var $select = $(this).parents('.city-select');
+                var $active = $select.find('a.active');
+                var last = $select.next().length === 0;
+                $active.removeClass('active');
+                $(this).addClass('active');
+                if ($active.data('code') !== $(this).data('code')) {
+                    $select.data('item', {
+                        address: $(this).attr('title'), code: $(this).data('code')
+                    });
+                    $(this).trigger(EVENT_CHANGE);
+                    $this.feedText();
+                    $this.feedVal();
+                    if (last) {
+                        $this.close();
+                    }
+                }
+            }).on('click', '.city-select-tab a', function () {
+                if (!$(this).hasClass('active')) {
+                    var type = $(this).data('count');
+                    $this.tab(type);
+                }
+            }).on('mousedown', function () {
+                $this.needBlur = false;
+            });
+
+            if (this.$province) {
+                this.$province.on(EVENT_CHANGE, (this._changeProvince = $.proxy(function () {
+                    this.output(CITY);
+                    this.output(DISTRICT);
+                    this.tab(CITY);
+                }, this)));
+            }
+
+            if (this.$city) {
+                this.$city.on(EVENT_CHANGE, (this._changeCity = $.proxy(function () {
+                    this.output(DISTRICT);
+                    this.tab(DISTRICT);
+                }, this)));
+            }
+        },
+
+        open: function (type) {
+            type = type || PROVINCE;
+            this.$dropdown.show();
+            this.$textspan.addClass('open').addClass('focus');
+            this.tab(type);
+        },
+
+        close: function (blur) {
+            this.$dropdown.hide();
+            this.$textspan.removeClass('open');
+            if (blur) {
+                this.$textspan.removeClass('focus');
+            }
+        },
+
+        unbind: function () {
+
+            $(document).off('click', this._mouteclick);
+
+            this.$element.off('change', this._changeElement);
+            this.$element.off('focus', this._focusElement);
+            this.$element.off('blur', this._blurElement);
+
+            this.$textspan.off('click');
+            this.$textspan.off('mousedown');
+
+            this.$dropdown.off('click');
+            this.$dropdown.off('mousedown');
+
+            if (this.$province) {
+                this.$province.off(EVENT_CHANGE, this._changeProvince);
+            }
+
+            if (this.$city) {
+                this.$city.off(EVENT_CHANGE, this._changeCity);
+            }
+        },
+
+        getText: function () {
+            var text = '';
+            this.$dropdown.find('.city-select')
+                .each(function () {
+                    var item = $(this).data('item'),
+                        type = $(this).data('count');
+                    if (item) {
+                        text += ($(this).hasClass('province') ? '' : '/') + '<span class="select-item" data-count="' +
+                            type + '" data-code="' + item.code + '">' + item.address + '</span><input type="hidden" name="' + type + '_id"  value="' + item.code + '"  />';
+                    }
+                });
+            return text;
+        },
+
+        getPlaceHolder: function () {
+            return this.$element.attr('placeholder') || this.options.placeholder;
+        },
+
+        feedText: function () {
+            var text = this.getText();
+            if (text) {
+                this.$textspan.find('>.placeholder').hide();
+                this.$textspan.find('>.title').html(this.getText()).show();
+            } else {
+                this.$textspan.find('>.placeholder').text(this.getPlaceHolder()).show();
+                this.$textspan.find('>.title').html('').hide();
+            }
+        },
+
+        getVal: function () {
+            var text = '';
+            this.$dropdown.find('.city-select')
+                .each(function () {
+                    var item = $(this).data('item');
+                    if (item) {
+                        text += ($(this).hasClass('province') ? '' : '/') + item.address;
+                    }
+                });
+            return text;
+        },
+
+        feedVal: function () {
+            this.$element.val(this.getVal());
+        },
+
+        output: function (type) {
+            var options = this.options;
+            //var placeholders = this.placeholders;
+            var $select = this['$' + type];
+            var data = type === PROVINCE ? {} : [];
+            var item;
+            var districts;
+            var code;
+            var matched = null;
+            var value;
+
+            if (!$select || !$select.length) {
+                return;
+            }
+
+            item = $select.data('item');
+
+            value = (item ? item.address : null) || options[type];
+
+            code = (
+                type === PROVINCE ? 86 :
+                    type === CITY ? this.$province && this.$province.find('.active').data('code') :
+                        type === DISTRICT ? this.$city && this.$city.find('.active').data('code') : code
+            );
+
+            districts = $.isNumeric(code) ? ChineseDistricts[code] : null;
+
+            if ($.isPlainObject(districts)) {
+                $.each(districts, function (code, address) {
+                    var provs;
+                    if (type === PROVINCE) {
+                        provs = [];
+                        for (var i = 0; i < address.length; i++) {
+                            if (address[i].address === value) {
+                                matched = {
+                                    code: address[i].code,
+                                    address: address[i].address
+                                };
+                            }
+                            provs.push({
+                                code: address[i].code,
+                                address: address[i].address,
+                                selected: address[i].address === value
+                            });
+                        }
+                        data[code] = provs;
+                    } else {
+                        if (address === value) {
+                            matched = {
+                                code: code,
+                                address: address
+                            };
+                        }
+                        data.push({
+                            code: code,
+                            address: address,
+                            selected: address === value
+                        });
+                    }
+                });
+            }
+
+            $select.html(type === PROVINCE ? this.getProvinceList(data) :
+                this.getList(data, type));
+            $select.data('item', matched);
+        },
+
+        getProvinceList: function (data) {
+            var list = [],
+                $this = this,
+                simple = this.options.simple;
+
+            $.each(data, function (i, n) {
+                list.push('<dl class="clearfix">');
+                list.push('<dt>' + i + '</dt><dd>');
+                $.each(n, function (j, m) {
+                    list.push(
+                        '<a' +
+                        ' title="' + (m.address || '') + '"' +
+                        ' data-code="' + (m.code || '') + '"' +
+                        ' class="' +
+                        (m.selected ? ' active' : '') +
+                        '">' +
+                        (simple ? $this.simplize(m.address, PROVINCE) : m.address) +
+                        '</a>');
+                });
+                list.push('</dd></dl>');
+            });
+
+            return list.join('');
+        },
+
+        getList: function (data, type) {
+            var list = [],
+                $this = this,
+                simple = this.options.simple;
+            list.push('<dl class="clearfix"><dd>');
+
+            $.each(data, function (i, n) {
+                list.push(
+                    '<a' +
+                    ' title="' + (n.address || '') + '"' +
+                    ' data-code="' + (n.code || '') + '"' +
+                    ' class="' +
+                    (n.selected ? ' active' : '') +
+                    '">' +
+                    (simple ? $this.simplize(n.address, type) : n.address) +
+                    '</a>');
+            });
+            list.push('</dd></dl>');
+
+            return list.join('');
+        },
+
+        simplize: function (address, type) {
+            address = address || '';
+            if (type === PROVINCE) {
+                return address.replace(/[省,市,自治区,壮族,回族,维吾尔]/g, '');
+            } else if (type === CITY) {
+                return address.replace(/[市,地区,回族,蒙古,苗族,白族,傣族,景颇族,藏族,彝族,壮族,傈僳族,布依族,侗族]/g, '')
+                    .replace('哈萨克', '').replace('自治州', '').replace(/自治县/, '');
+            } else if (type === DISTRICT) {
+                return address.length > 2 ? address.replace(/[市,区,县,旗]/g, '') : address;
+            }
+        },
+
+        tab: function (type) {
+            var $selects = this.$dropdown.find('.city-select');
+            var $tabs = this.$dropdown.find('.city-select-tab > a');
+            var $select = this['$' + type];
+            var $tab = this.$dropdown.find('.city-select-tab > a[data-count="' + type + '"]');
+            if ($select) {
+                $selects.hide();
+                $select.show();
+                $tabs.removeClass('active');
+                $tab.addClass('active');
+            }
+        },
+
+        reset: function () {
+            this.$element.val(null).trigger('change');
+        },
+
+        destroy: function () {
+            this.unbind();
+            this.$element.removeData(NAMESPACE).removeClass('city-picker-input');
+            this.$textspan.remove();
+            this.$dropdown.remove();
+        }
+    };
+
+    /**
+     * 城市组件默认值和参数
+     */
+    CityPicker.DEFAULTS = {
+        simple: false,
+        responsive: false,
+        placeholder: '请选择省/市/区',
+        level: 'district',// 级别
+        provincename: '',//input hidden 的值
+        cityname: '',//input hidden 的值
+        districtname: '',//input hidden 的值
+        province: '',// 默认省份名称
+        city: '',// 默认地市名称
+        district: ''// 默认区县名称
+    };
+
+    CityPicker.setDefaults = function (options) {
+        $.extend(CityPicker.DEFAULTS, options);
+    };
+
+    // Save the other citypicker
+    CityPicker.other = $.fn.citypicker;
+
+    // Register as jQuery plugin
+    $.fn.citypicker = function (option) {
+        var args = [].slice.call(arguments, 1);
+
+        return this.each(function () {
+            var $this = $(this);
+            var data = $this.data(NAMESPACE);
+            var options;
+            var fn;
+
+            if (!data) {
+                if (/destroy/.test(option)) {
+                    return;
+                }
+
+                options = $.extend({}, $this.data(), $.isPlainObject(option) && option);
+                $this.data(NAMESPACE, (data = new CityPicker(this, options)));
+            }
+
+            if (typeof option === 'string' && $.isFunction(fn = data[option])) {
+                fn.apply(data, args);
+            }
+        });
+    };
+
+    $.fn.citypicker.Constructor = CityPicker;
+    $.fn.citypicker.setDefaults = CityPicker.setDefaults;
+
+    // No conflict
+    $.fn.citypicker.noConflict = function () {
+        $.fn.citypicker = CityPicker.other;
+        return this;
+    };
+
+    //$(function () {
+    //    $('[data-toggle="city-picker"]').citypicker();
+    //});
+
+    /**
+     * 城市选择组件接口输出
+     */
+    exports('citypicker', CityPicker);
+});

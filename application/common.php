@@ -1,12 +1,12 @@
 <?php
 // +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: 流年 <liu21st@gmail.com>
+// | Author: 牧羊人 <rxthink@gmail.com>
 // +----------------------------------------------------------------------
 
 // 应用公共文件
@@ -18,7 +18,7 @@
 /**
  * 返回消息对象
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-10
  */
 if (defined('IS_API')) 
@@ -42,7 +42,7 @@ if (defined('IS_API'))
 /**
  * 下拉选择组件
  *
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-11
  */
 function make_option($data, $selected=0, $show_field='name', $val_field='id')
@@ -74,7 +74,7 @@ function make_option($data, $selected=0, $show_field='name', $val_field='id')
 /**
  * 发送短信
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-08
  */
 function send_sms()
@@ -85,7 +85,7 @@ function send_sms()
 /**
  * 发送邮件
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-08
  */
 function send_email()

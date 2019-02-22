@@ -1,7 +1,7 @@
 /**
  *	订单商品
  *
- *	@auth zongjl
+ *	@auth 牧羊人
  *	@date 2018-10-22
  */
 layui.use(['func'],function(){
@@ -30,7 +30,7 @@ layui.use(['func'],function(){
 				,{ field:'attr_value', width:350, title: '商品属性', align:'center' }
 				,{ field:'format_price', width:100, title: '商品单价', align:'center' }
 				,{ field:'product_num', width:100, title: '商品数量', align:'center' }
-				,{ field:'format_add_time', width:180, title: '创建时间', align:'center' }
+				,{ field:'format_add_time', width:210, title: '创建时间', align:'center' }
 			];
 		
 		//【渲染TABLE】

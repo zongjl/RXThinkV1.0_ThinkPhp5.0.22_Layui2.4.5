@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 站点选择-挂件
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-13
  */
 namespace app\admin\widget;
@@ -13,7 +22,7 @@ class ItemWidget extends BaseWidget
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-13
      */
     function __construct()
@@ -25,7 +34,7 @@ class ItemWidget extends BaseWidget
     /**
      * 站点栏目选择
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-13
      */
     function select($itemId, $cateId=0, $limit=1)

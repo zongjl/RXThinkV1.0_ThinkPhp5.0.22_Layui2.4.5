@@ -1,24 +1,33 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 菜单-服务类
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-10
  */
 namespace app\admin\service;
-use app\admin\model\ServiceModel;
+use app\admin\model\AdminServiceModel;
 use app\admin\model\MenuModel;
-class MenuService extends ServiceModel
+class MenuService extends AdminServiceModel
 {
     
     /**
      * 初始化操作
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      * (non-PHPdoc)
-     * @see \app\admin\model\ServiceModel::initialize()
+     * @see \app\admin\model\AdminServiceModel::initialize()
      */
     function initialize() 
     {
@@ -29,10 +38,10 @@ class MenuService extends ServiceModel
     /**
      * 获取数据列表
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      * (non-PHPdoc)
-     * @see \app\admin\model\ServiceModel::getList()
+     * @see \app\admin\model\AdminServiceModel::getList()
      */
     function getList()
     {
@@ -43,10 +52,10 @@ class MenuService extends ServiceModel
     /**
      * 添加或编辑
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      * (non-PHPdoc)
-     * @see \app\admin\model\ServiceModel::edit()
+     * @see \app\admin\model\AdminServiceModel::edit()
      */
     function edit()
     {
@@ -59,7 +68,7 @@ class MenuService extends ServiceModel
     /**
      * 批量设置节点
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-11
      */
     function batchFunc()
@@ -118,7 +127,7 @@ class MenuService extends ServiceModel
     /**
      * 获取导航菜单
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function getNavbar($auth) 

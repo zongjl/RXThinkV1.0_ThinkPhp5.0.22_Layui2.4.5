@@ -1,1 +1,90 @@
-layui.define("jquery",function(i){"use strict";var t=layui.$,o=layui.hint();var l=function(i){this.options=i};l.prototype.init=function(i){var e=this;i.addClass("checkBox");e.checkbox(i)};l.prototype.checkbox=function(o,i){var l=this,c=l.options;var e=i||c.nodes;layui.each(e,function(i,e){var n=t(['<li class="block'+(e.on?" on":"")+'" value="'+e.elemId+'[]" onmouseover="layui.layer.tips(\''+e.id+"',this,{tips:2})\" onmouseout=\"layui.layer.closeAll('tips');\">"+e.name,'<i class="choice"><i class="triangle"></i><i class="right layui-icon layui-icon-ok"></i></i><i class="del"><i class="layui-icon layui-icon-delete"></i></i><span class="hide">'+(e.on?'<input type="hidden" name="'+e.elemId+'[]" value="'+e.id+'">':"")+"</span></li>"].join(""));o.append(n);typeof c.click==="function"&&l.click(n,e);typeof c.del==="function"&&l.del(n,e)})};l.prototype.click=function(e,n){var i=this,o=i.options;e.on("click",function(i){e.toggleClass("on");if(e.hasClass("on")){n.on=true;e.children("span.hide").html('<input type="hidden" name="'+n.elemId+'[]" value="'+n.id+'">')}else{n.on=false;e.children("span.hide").html("")}layui.stope(i);o.click(n)})};l.prototype.del=function(n,o){var i=this,l=i.options;n.children("i.del").on("click",function(i){var e=layer.confirm("确定删除 ["+o.name+"]标签吗？",{btn:["删除","取消"]},function(){layer.close(e);if(l.del(o)){n.closest(".block").remove();layui.stope(i)}});return false})};i("checkbox",function(i){var e=new l(i=i||{});var n=t(i.elem);if(!n[0]){return o.error("layui.checkbox 没有找到"+i.elem+"元素")}e.init(n)})}).link("checkbox.css","checkboxcss");
+/**
+ * CheckBox复选框标签组件
+ * 
+ * @author 牧羊人
+ * @date 2018-11-23
+ */
+layui.define('jquery', function(exports){
+	"use strict";
+	var $ = layui.$
+	,hint = layui.hint();
+	var CheckBox = function(options){
+		this.options = options;
+	};
+	
+	/**
+	 * 初始化组件
+	 */
+	CheckBox.prototype.init = function(elem){
+		var that = this;
+		elem.addClass('checkBox'); //添加checkBox样式
+		that.checkbox(elem);
+	};
+	
+	/**
+	 * 节点解析
+	 */
+	CheckBox.prototype.checkbox = function(elem,children){
+		var that = this, options = that.options;
+		var nodes = children || options.nodes;
+		layui.each(nodes, function(index, item){
+			var li = $(['<li class="block'+(item.on?' on':'')+'" value="'+item.elemId+'[]" onmouseover="layui.layer.tips(\''+item.id+'\',this,{tips:2})" onmouseout="layui.layer.closeAll(\'tips\');">'+item.name,'<i class="choice"><i class="triangle"></i><i class="right layui-icon layui-icon-ok"></i></i><!--<i class="del"><i class="layui-icon layui-icon-delete"></i></i><span class="hide">-->'+(item.on?'<input type="hidden" name="'+item.elemId+'[]" value="'+item.id+'">':'')+'</span></li>'].join(''));
+			elem.append(li);
+			//触发点击节点回调
+			typeof options.click === 'function' && that.click(li, item);
+			//触发删除节点回调
+			typeof options.del === 'function' && that.del(li, item);
+		});
+	};
+	
+	/**
+	 * 点击节点回调
+	 */
+	CheckBox.prototype.click = function(elem, item){
+		var that = this, options = that.options;
+		elem.on('click', function(e){
+			elem.toggleClass("on");
+			if(elem.hasClass("on")){
+				item.on = true;
+				elem.children("span.hide").html('<input type="hidden" name="'+item.elemId+'[]" value="'+item.id+'">');
+			}else{
+				item.on = false;
+				elem.children("span.hide").html('');
+			}
+			layui.stope(e);
+			options.click(item);
+		});
+	};
+	
+	/**
+	 * 点击删除节点回调
+	 */
+	CheckBox.prototype.del = function(elem, item){
+		var that = this, options = that.options;
+		elem.children('i.del').on('click', function(e){
+			var index = layer.confirm('确定删除 ['+item.name+']标签吗？', {
+				btn: ['删除','取消']
+			}, function(){
+				layer.close(index);
+				if(options.del(item)){
+					elem.closest(".block").remove();
+					layui.stope(e);
+				}
+			});
+			return false;
+		});
+	};
+
+	/**
+	 * 模块接口输出
+	 */
+	exports('checkbox', function(options){
+		var checkbox = new CheckBox(options = options || {});
+		var elem = $(options.elem);
+		if(!elem[0]){
+			return hint.error('layui.checkbox 没有找到'+ options.elem +'元素');
+		}
+		checkbox.init(elem);
+	});
+	
+}).link('checkbox.css','checkboxcss');

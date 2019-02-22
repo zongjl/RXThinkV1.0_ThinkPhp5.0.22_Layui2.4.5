@@ -12,7 +12,7 @@
 /**
  * 数据库配置文件类
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-11
  */
 use think\Config;

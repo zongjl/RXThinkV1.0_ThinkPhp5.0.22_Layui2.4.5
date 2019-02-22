@@ -1,4 +1,4 @@
-# 企业级开发平台PHP版V1.0
+# 企业级开发平台PHP版V2.0
 
 <p align="center">
   <img width="300" src="http://images.kivii.renxixi.com/rxthink/logo.png" alt="RXThink开发团队">
@@ -39,15 +39,6 @@ RXThink系统是一款专为中小企业量身打造的研发框架，完全基�
     模块化：全新的架构和模块化的开发机制，便于灵活扩展和二次开发。
     开源免费：RXThink遵循Apache2开源协议,免费提供使用。
     用户行为：支持自定义用户行为，可以对单个用户或者组织机构。
-
-	
-#### 技术亮点
-
-    1.PHP快速生成表单；
-    2.前台Vue、RequireJS、node封装所有接口【待研发】。
-    3.PHPExcel数据导出,导出表格更加美观,可视。
-    4.ThinkPHP5.0.22+layui.table自己封装快速二次开发。
-    5.一键安装
 	
 <br> 
 
@@ -112,12 +103,16 @@ project  应用部署目录
 ```
 
 <br> 
+
+#### 官网地址
+
+欢迎访问RXThink官网地址：[http://www.rxthink.cn](http://www.rxthink.cn)
 	
 #### 演示地址
 
 本演示地址仅供浏览，为了查阅体验，暂未对系统做严格的权限可操作控制，请大家自觉维护，勿恶意操作；
 
-后台地址：[http://manage.tp3.rxthink.cn](http://manage.tp3.rxthink.cn) 账号：admin 密码：admin123
+后台地址：[http://manage.tp50.rxthink.cn](http://manage.tp50.rxthink.cn) 账号：admin 密码：admin123
 	
 <br>
 	

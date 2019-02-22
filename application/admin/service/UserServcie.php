@@ -1,23 +1,32 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 用户管理-服务类
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-14
  */
 namespace app\admin\service;
-use app\admin\model\ServiceModel;
+use app\admin\model\AdminServiceModel;
 use app\admin\model\UserModel;
-class UserService extends ServiceModel
+class UserService extends AdminServiceModel
 {
     /**
      * 初始化模型
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-14
      * (non-PHPdoc)
-     * @see \app\admin\model\ServiceModel::initialize()
+     * @see \app\admin\model\AdminServiceModel::initialize()
      */
     function initialize()
     {
@@ -28,10 +37,10 @@ class UserService extends ServiceModel
     /**
      * 获取数据列表
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-14
      * (non-PHPdoc)
-     * @see \app\admin\model\ServiceModel::getList()
+     * @see \app\admin\model\AdminServiceModel::getList()
      */
     function getList()
     {
@@ -57,7 +66,7 @@ class UserService extends ServiceModel
     /**
      * 设置会员状态
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-14
      */
     function setStatus()

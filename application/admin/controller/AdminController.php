@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 管理人员-控制器
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-10
  */
 namespace app\admin\controller;
@@ -15,7 +24,7 @@ class AdminController extends AdminBaseController
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     public function __construct() 
@@ -28,7 +37,7 @@ class AdminController extends AdminBaseController
     /**
      * 设置人员角色
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     function setRole()
@@ -60,7 +69,7 @@ class AdminController extends AdminBaseController
     /**
      * 重置人员密码
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-12
      */
     function resetPwd()

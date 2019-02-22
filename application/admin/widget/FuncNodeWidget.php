@@ -1,9 +1,18 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 功能节点-挂件
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-10
  */
 namespace app\admin\widget;
@@ -12,7 +21,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 构造方法
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function __construct()
@@ -23,7 +32,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 添加节点【全局导航】
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnAdd($funcName,$param=[]) {
@@ -34,7 +43,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 批量删除节点【全局导航】
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnDAll($funcName) {
@@ -44,7 +53,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 常用按钮【全局导航】
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnFunc($funcAct,$funcIcon,$funcName,$funcColor='',$funcType=1,$param=[]) {
@@ -62,7 +71,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 添加节点【行数据】
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnAdd2() {
@@ -72,7 +81,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 编辑节点【行数据】
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnEdit($funcName) {
@@ -83,7 +92,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 删除节点【行数据】
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnDel($funcName) {
@@ -94,7 +103,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 查看详情【行数据】
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnDetail($funcName) {
@@ -105,7 +114,7 @@ class FuncNodeWidget extends BaseWidget
     /**
      * 设置权限
      *
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function btnSetAuth($funcName) {

@@ -1,7 +1,7 @@
 /**
  * 搜索框提示组件、输入框提示组件
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-11-23
  */
 layui.define(['jquery', 'table'], function(exports) {
@@ -28,9 +28,11 @@ layui.define(['jquery', 'table'], function(exports) {
 		opt.loading = opt.loading || true;
 		opt.limit = opt.limit || 3;
 		opt.size = opt.size || 'sm'; //小尺寸的表格
+		opt.show_name = opt.show_name || 'name';
+		opt.show_value = opt.show_value || 'id';
 
 		//初始化输入框提示容器
-		$("#" + opt.id).after("<div id='sugItem' style='background-color: #fff;display: none;z-index:1;position: absolute;width:100%;'></div>");
+		$("#" + opt.id).after("<div id='sugItem' style='background-color: #fff;display: none;z-index:1;position: absolute;width:500px;'></div>");
 		
 		//输入框提示容器移出事件：鼠标移出隐藏输入提示框
 		$("#" + opt.id).parent().mouseleave(function() {
@@ -89,7 +91,8 @@ layui.define(['jquery', 'table'], function(exports) {
 		//监听下拉表格行单击事件（单击||双击事件为：row||rowDouble）设置单击或双击选中对应的行
 		table.on('rowDouble(' + "selectSearch_" + opt.id + ')', function(obj) {
 			//获取选中行所传入字段的值
-			$("#" + opt.id).val(obj.data.e_name);
+			$("#" + opt.id).val(obj.data[opt.show_name]);
+			$("#" + opt.id.replace(new RegExp("_name","g"),"")).val(obj.data[opt.show_value]);
 			$("#" + opt.id).next().hide().html("");
 		});
 	}

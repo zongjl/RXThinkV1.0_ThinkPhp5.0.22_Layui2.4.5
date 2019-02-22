@@ -1,24 +1,33 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 /**
  * 管理人员-服务类
  * 
- * @author zongjl
+ * @author 牧羊人
  * @date 2018-12-10
  */
 namespace app\admin\service;
-use app\admin\model\ServiceModel;
+use app\admin\model\AdminServiceModel;
 use app\admin\model\AdminModel;
 use think\captcha\Captcha;
-class AdminService extends ServiceModel {
+class AdminService extends AdminServiceModel {
     
     /**
      * 初始化模型
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      * (non-PHPdoc)
-     * @see \app\admin\model\ServiceModel::initialize()
+     * @see \app\admin\model\AdminServiceModel::initialize()
      */
     public function initialize()
     {
@@ -30,7 +39,7 @@ class AdminService extends ServiceModel {
     /**
      * 系统登录
      * 
-     * @author zongjl
+     * @author 牧羊人
      * @date 2018-12-10
      */
     function login()
@@ -70,9 +79,8 @@ class AdminService extends ServiceModel {
             return message("您的帐号已被禁言，请联系管理员", false);
         }
         
-        //登录人ID存入SESSION
-        $adminId = $info['id'];
-        $_SESSION['adminId'] = $adminId;
+        //登录ID存SESSION
+        session('adminId',$info['id']);
         
 //         //更新用户表
 //         $data = [

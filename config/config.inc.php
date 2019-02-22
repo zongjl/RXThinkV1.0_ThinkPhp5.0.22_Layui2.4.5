@@ -1,23 +1,32 @@
 <?php
+// +----------------------------------------------------------------------
+// | RXThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017-2019 http://rxthink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: 牧羊人 <rxthink@gmail.com>
+// +----------------------------------------------------------------------
 
 //定义域名常量
-define('MAIN_URL','http://main.kivii.com');
-define('SITE_URL','http://www.kivii.com');
-define('WAP_URL','http://h5.kivii.com');
-define('API_URL','http://api.kivii.com');
-define('IMG_URL','http://images.kivii.com');
-define('ATTACHMENT_PATH', 'D:/xampp/htdocs/Kivii/TPV5.0/public/uploads');
+define('MAIN_URL','http://main.rxthink5.com');
+define('SITE_URL','http://www.rxthink5.com');
+define('WAP_URL','http://h5.rxthink5.com');
+define('API_URL','http://api.rxthink5.com');
+define('IMG_URL','http://images.rxthink5.com');
+define('ATTACHMENT_PATH', 'C:/xampp/htdocs/RXThink/RXThink5.0_V2.0_DEV/public/uploads');
 define('IMG_PATH', ATTACHMENT_PATH."/img");
 define('UPLOAD_TEMP_PATH', IMG_PATH . '/temp');
 
 //配置文件
 return [
     // 企业全称
-    'site_name'     => '企业框架V2.0',
+    'site_name'     => 'RXThink_TP5.0版V2.0',
     // 企业简称
-    'nick_name'     => '企业框架V2.0',
+    'nick_name'     => 'RXThink框架',
     // 数据库链接
-    'db_config'     => 'mysql://root:111111@127.0.0.1:3306/kivii',
+    'db_config'     => 'mysql://root:111111@127.0.0.1:3306/rxthink',
     // 数据表前缀
     'db_prefix'     => 'yk_',
     // 数据库编码
@@ -25,7 +34,7 @@ return [
     // 缓存驱动类型及链接
     'cache_config'  =>'redis://:@127.0.0.1:6379/1',
     // 缓存前缀
-    'cache_key'     => 'Kv',
+    'cache_key'     => 'RX5',
     // 上传参数配置
     'upload'        => [
         //上传图片参数配置

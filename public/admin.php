@@ -17,6 +17,9 @@ define('APP_PATH', __DIR__ . '/../application/');
 // 自定义配置文件目录
 define('CONF_PATH', __DIR__ . '/../config/');
 
+// 自定义扩展文件目录
+define('EXTEND_PATH', __DIR__ . '/../extend/');
+
 // 绑定模块
 define('BIND_MODULE', 'admin');
 
